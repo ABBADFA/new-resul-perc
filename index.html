@@ -13,14 +13,14 @@
         .yellow { color: #FFFF00; }
         .red { color: #FF0000; }
         
-        /* Add attractive background color */
+        /* Add gradient background */
         body {
-            background-color: #ffd700; /* Gold */
+            background: linear-gradient(to bottom, #ff66a3, #ffccff); /* Gradient from pink to light pink */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow: hidden; /* Prevent scrollbars */
-            position: relative; /* Required for absolute positioning of floating confetti */
+            position: relative; /* Required for absolute positioning of floating emojis */
         }
         
         /* Style the form */
@@ -32,21 +32,16 @@
             margin: 20px;
         }
 
-        /* Style confetti animation */
-        @keyframes confetti-fall {
-            0% { transform: translateY(-100vh) rotateZ(0deg); }
-            100% { transform: translateY(100vh) rotateZ(360deg); }
+        /* Style floating emojis */
+        @keyframes floatEmoji {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
         }
 
-        .confetti {
+        .floating-emoji {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(45deg, #f3e9e9, #f3e9e9);
-            border-radius: 50%;
-            box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
-            animation: confetti-fall 6s linear infinite;
-            animation-delay: calc(0.1s * var(--i));
+            animation: floatEmoji 5s ease-in-out infinite;
         }
     </style>
 </head>
@@ -105,21 +100,16 @@
             resultDiv.innerHTML += "<h3 class='yellow'>Percentage: " + percentage.toFixed(2) + "%</h3>";
             resultDiv.innerHTML += "<h3 class='red'>CONGRATULATIONS FROM ABBAD</h3>";
 
-            // Create and append confetti animation
-            for (var i = 0; i < 100; i++) {
-                var confetti = document.createElement("div");
-                confetti.classList.add("confetti");
-                confetti.style.left = Math.random() * window.innerWidth + "px";
-                confetti.style.setProperty("--i", i);
-                document.body.appendChild(confetti);
-            }
-
-            // Remove confetti after a certain time
-            setTimeout(function() {
-                document.querySelectorAll(".confetti").forEach(function(confetti) {
-                    confetti.remove();
-                });
-            }, 6000); // 6 seconds
+            // Create and append floating emojis
+            var emojis = ['🎉', '🎈', '🎊', '🥳', '🌟', '🎇', '🎆', '🎂']; // Add more emojis if needed
+            emojis.forEach(function(emoji) {
+                var floatingEmoji = document.createElement("span");
+                floatingEmoji.innerHTML = emoji;
+                floatingEmoji.className = "floating-emoji";
+                floatingEmoji.style.left = Math.random() * window.innerWidth + "px";
+                floatingEmoji.style.top = Math.random() * window.innerHeight + "px";
+                document.body.appendChild(floatingEmoji);
+            });
         });
     </script>
 </body>
