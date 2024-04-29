@@ -13,9 +13,9 @@
         .yellow { color: #FFFF00; }
         .red { color: #FF0000; }
         
-        /* Add light background color */
+        /* Add attractive background color */
         body {
-            background-color: #f2f2f2; /* Light gray */
+            background-color: #ffcc00; /* Vibrant yellow */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -101,10 +101,32 @@
             resultDiv.innerHTML += "<h3 class='red'>CONGRATULATIONS FROM ABBAD</h3>";
 
             // Create and append floating icons
-            var icon = document.createElement("img");
-            icon.src = "https://emojicdn.elk.sh/🎉";
-            icon.className = "floating-icon";
-            document.body.appendChild(icon);
+            var iconContainer = document.createElement("div");
+            iconContainer.style.position = "fixed";
+            iconContainer.style.top = "0";
+            iconContainer.style.left = "0";
+            iconContainer.style.width = "100%";
+            iconContainer.style.height = "100%";
+            iconContainer.style.display = "flex";
+            iconContainer.style.justifyContent = "center";
+            iconContainer.style.alignItems = "center";
+            document.body.appendChild(iconContainer);
+
+            var emojis = ['🎉', '🎈', '🥳', '🌟', '🎊']; // Add more emojis if needed
+            emojis.forEach(function(emoji) {
+                var icon = document.createElement("span");
+                icon.innerHTML = emoji;
+                icon.className = "floating-icon";
+                icon.style.fontSize = "3rem";
+                icon.style.animationDuration = (Math.random() * 4 + 2) + "s"; // Randomize animation duration
+                icon.style.opacity = Math.random(); // Randomize opacity
+                iconContainer.appendChild(icon);
+            });
+
+            // Remove floating icons after a certain time
+            setTimeout(function() {
+                iconContainer.remove();
+            }, 10000); // 10 seconds
         });
     </script>
 </body>
