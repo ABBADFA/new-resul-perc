@@ -22,7 +22,7 @@
             overflow: hidden; /* Prevent scrollbars */
             position: relative; /* Required for absolute positioning of floating emojis */
         }
-        
+
         /* Style the form */
         form {
             background-color: #fff; /* White */
@@ -43,10 +43,16 @@
             position: absolute;
             animation: floatEmoji 3s ease-in-out infinite;
         }
+
+        /* Dynamic text color based on background */
+        .dynamic-color {
+            color: white; /* Default text color */
+        }
     </style>
 </head>
 <body>
-    <h1 class="green">Assalamualaikum Shamsians... Abbad is here..BEST OF LUCK</h1>
+    <!-- Dynamically colored text -->
+    <h1 class="dynamic-color">Assalamualaikum Shamsians... Abbad is here..BEST OF LUCK</h1>
     <h2 class="blue">Please enter the marks for your top five subjects.</h2>
 
     <!-- Form to input marks -->
@@ -110,6 +116,26 @@
                 floatingEmoji.style.top = Math.random() * window.innerHeight + "px";
                 document.body.appendChild(floatingEmoji);
             });
+        });
+
+        // Dynamically change text color based on background
+        window.addEventListener("DOMContentLoaded", function() {
+            var body = document.body;
+            var h1 = document.querySelector("h1.dynamic-color");
+
+            // Get background color in RGB format
+            var computedBackgroundColor = getComputedStyle(body).backgroundColor;
+            var rgb = computedBackgroundColor.match(/\d+/g);
+
+            // Calculate luminance
+            var luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+
+            // Change text color based on luminance
+            if (luminance < 128) {
+                h1.style.color = "white";
+            } else {
+                h1.style.color = "black";
+            }
         });
     </script>
 </body>
